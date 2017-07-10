@@ -1,0 +1,44 @@
+$(document).ready(function(){
+  var quotes = [];
+  
+  /**
+  var OurRequest = new XMLHTTPRequest();
+  ourRequest.open('Get', url); 
+	ourRequest.send();
+  ourRequest.onreadystatechange = function() {
+    if(ourRequest.readyState == 4 && ourRequest.status == 200){
+      data = JSON.parse(ourRequest.responseText);
+    }    
+  }
+  **/
+  
+  $.ajax({
+    url : "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=30&callback=",
+    type: "GET",
+    dataType: "json",
+    success: function(data){
+      console.log(quotes = data);
+      
+    }
+  })
+    
+  
+  
+  $("button").click(function(){
+    var html = "";
+    var num = Math.floor(Math.random()*30);
+    var object = quotes[num];
+    html += object.content;
+    html += "<p>---  "+ object.title +"</p>"
+    console.log(quotes[num]);
+    
+    $("#result").empty();
+    $("#result").append(html);
+    
+  });
+ 
+  
+	
+	
+
+}); 
